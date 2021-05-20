@@ -24,7 +24,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'home';
+    public const LOGIN_ROUTE = 'app_login';
 
     private $entityManager;
     private $urlGenerator;
@@ -65,11 +65,16 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
       
-        
-        if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException();
-            
+        try {
+            if (!$this->csrfTokenManager->isTokenValid($token)) {
+
+                throw new InvalidCsrfTokenException();
+                
+            }
+        }catch(InvalidCsrfTokenException $e){
+            //none
         }
+       
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
@@ -100,7 +105,8 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
         }
 
         // For example : 
-        return new RedirectResponse($this->urlGenerator->generate('home'));
+        
+       // return new RedirectResponse($this->urlGenerator->generate('home',[ 'Reload' => true ])); // commented redirect from iframe
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

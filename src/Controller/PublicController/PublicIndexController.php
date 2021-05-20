@@ -12,22 +12,18 @@ class PublicIndexController extends PublicController {
     /**
      * @Route("/",name="home")
      */
-    public function index(Request $request){
+    public function index(Request $request, $Reload = null ){
         try {
             $form = parent::getRegForm($request);
             $data  = [
                 'Regform' =>$form,
                 'last_username'=>'',
-                'error'=>''
+                'error'=>'',
+                'Reload' => $Reload
             ];
-        
-                $logForm = parent::getLogForm($this->ai);
-                $data['last_username']=$logForm['last_username'];
-                $data['error']=$logForm['error'];
-                
-           
-           
-            //var_dump($data['error']);
+            if($form == null ){
+                return $this->redirectToRoute('home');
+            }
             return $this->render('public/index.html.twig',$data);
         }catch(\TypeError $e){
             return $this->redirectToRoute('home');

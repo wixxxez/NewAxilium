@@ -3,9 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Service\UserService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -22,11 +24,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 {
     private $em;
     private $psw;
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $em, UserPasswordEncoderInterface $psw)
+    private $userServ;
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $em, UserPasswordEncoderInterface $psw,UserService $userServ)
     {
         $this->em = $em;
         $this->psw=$psw;
+        $this->userServ = $userServ;
         parent::__construct($registry, User::class);
+
     }
 
     /**
@@ -57,8 +62,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setRoles(['ROLE_ADMIN']);
         $this->em->persist($user);
         $this->em->flush();
+        
         return $user;
     }
+    
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
