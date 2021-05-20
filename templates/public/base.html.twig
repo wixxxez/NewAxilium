@@ -120,37 +120,32 @@
 							
 							<div role="tabpanel" class="tab-pane fade in active show" id="Section1">
 								
-								<form class="form-horizontal" action='' method='POST'>
+							<form class="form-horizontal" action='' method='POST'>
 								
-									<div class="form-group">
+							{% if error %}
+        							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    							{% endif %}
+
+
+    
+								<label for="inputId">Email</label>
+								<input type="text" value="{{ last_username }}" name="id" id="inputId" class="form-control" autocomplete="username" required autofocus>
+								<label for="inputPassword">Password</label>
+								<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+								<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+
 									
-										<label for="exampleInputEmail1">Email</label>
-										<input type="email" class="form-control" id="exampleInputEmail1" name='uname' required>
-										
-									</div>
-									
-									<div class="form-group">
-										<label for="exampleInputPassword1">Password</label>
-										<input type="password" class="form-control" id="exampleInputPassword1" name='haslo' required>
-									</div>
-									
-									<div class="form-group">
-										
-										
-									
-									</div>
-									
-									<div class="form-group">
-										<input type="submit" class="btn btn-default" name='login' value='sign in'>
-									</div>
+								<div class="form-group">
+									<input type="submit" class="btn btn-default" name='login' value='sign in'>
+								</div>
 									
 									
 								
-								</form> <!-- /form -->
+							</form> <!-- /form -->
 							      <div class="form-group forgot-pass">
                                       <button onclick="smoke.prompt('Введите свой email. Вы получите письмо с подтверждением на свою почту', function(result){window.location.href = 'reset.php?token='+result;})" class="btn btn-default" style='color:grey'>Forgot password ?</button>
 									</div>  
-							</div>
+						</div>
 							
 							<div role="tabpanel" class="tab-pane fade" id="Section2">
 								
@@ -160,10 +155,10 @@
 										<label for="exampleInputEmail1">First Name</label>
 										<input type="text" class="form-control" id="exampleInputEmail1" name='fname' required >
 									</div>-->
-						
 									
-									{{ form(form) }}
-								
+									
+									{{ form(Regform) }}
+									
 								</form> <!-- /form -->
 							
 							</div>
@@ -177,8 +172,33 @@
 				</div> <!-- /modal -->{% endblock %}
 
 			</div>
+			<!-- AVTORIZATION PROFILE -->
+			{% if app.user!=null %}
+			<div class="dropdown open" tabindex="0">
+				
+				<button class="btn btn-secondary dropdown-toggle avtorization" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<a class="menu-item menu-green user-name" href="#">
+						<img class="avatar" src="{{ app.user.photo }}">
+						<span> {{ app.user.name }}</span>
+					</a>
+				</button>
+				
+				<div class="dropdown-menu avtorization" aria-labelledby="dropdownMenuButton" tabindex="-1">
+					<a class="item" href="{{ path('home') }}">
+						<i class="icon-cogs"></i>
+						<span>My Profile</span>
+					</a>
+					<a class="item" href="{{ path('app_logout') }}">
+						<i class="icon-exit"></i>
+						<span>Logout</span>
+					</a>
+				</div>
+			
+			</div> <!-- /AVTORIZATION PROFILE -->
+			
+			{% else %}
         <button class="site-button pull-right m-t15 login" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
-
+			 {% endif %}
 			
 
 			

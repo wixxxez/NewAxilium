@@ -50,11 +50,22 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $views=0;
+    /**
+     * @ORM\Column(type="string",length=255)
+    */
+    private $name;
     public function getHobby() : string {
         return $this->hobby;
     }
     public function sethobby(string $hobby):self{
         $this->hobby = $hobby;
+        return $this;
+    }
+    public function getName() : string {
+        return $this->name;
+    }
+    public function setName(string $hobby):self{
+        $this->name = $hobby;
         return $this;
     }
     public function getPlainPassword():string {
