@@ -39,8 +39,8 @@ class ImageService implements ImageServiceInterface {
     public function removeFile(string $filename)
     {
         $fs = new Filesystem();
-        //$fi = $this->getDirectory().'/'.$filename;
-        //$fs->remove([$this->getDirectory(), $filename]);
+       
+        $fs->remove($filename);
 
         
     }
