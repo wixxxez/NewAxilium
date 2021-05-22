@@ -74,7 +74,7 @@
 									<hr/>
 								    
 									<span class="tag tag-primary"><i class="fa fa-money"></i> Сумма пожертвований: 0 UAH</span><br/><br/>
-									<span class="tag tag-danger"><i class="fa fa-eye"></i> Просмотров: {{ user.views }} </span><br/><br/>
+									<span class="tag tag-danger"><i class="fa fa-eye"></i> Просмотров: {{ user.views / 2 |number_format(1) }} </span><br/><br/>
 									<span class="tag tag-danger"><i class="fa fa-briefcase"></i> Количество сборов: 0</span><br/><br/>
 								</div>
 
@@ -113,80 +113,14 @@
 
 							<h4 class="m-y-2">Edit Profile</h4>
 							<hr>
-							
-							<form role="form" action="" method="POST">
-
-								<div class="form-group row">
-
-									<label class="col-lg-3 col-form-label form-control-label">First name</label>
-
-									<div class="col-lg-9">
-										<input class="form-control" type="text" placeholder="Adam" name='fname'>
-									</div>
-
-								</div>
-
-								<div class="form-group row">
-
-									<label class="col-lg-3 col-form-label form-control-label">Last name</label>
-
-									<div class="col-lg-9">
-										<input class="form-control" type="text" placeholder="Marcus" name='lname'>
-									</div>
-
-								</div>
-
-								<div class="form-group row">
-
-									<label class="col-lg-3 col-form-label form-control-label">Email</label>
-
-									<div class="col-lg-9">
-										<input class="form-control" type="email" placeholder="email@gmail.com" name='email'>
-									</div>
-
-								</div>
-
-								<div class="form-group row">
-
-									<label class="col-lg-3 col-form-label form-control-label">Hobbies</label>
-
-									<div class="col-lg-9">
-										<input class="form-control" type="text" value="" name='hobby'>
-									</div>
-
-								</div>
-								<div class="form-group row">
-
-									<label class="col-lg-3 col-form-label form-control-label">Password</label>
-
-									<div class="col-lg-9">
-										<input class="form-control" type="password" value="" name='p1'>
-									</div>
-
-								</div>
-
-								<div class="form-group row">
-
-									<label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
-
-									<div class="col-lg-9">
-										<input class="form-control" type="password" value="" name='p2'>
-									</div>
-
-								</div>
-
-								<div class="form-group row">
-
-									<label class="col-lg-3 col-form-label form-control-label"></label>
-
-									<div class="col-lg-9">
-									
-										<input type="submit" class="btn btn-primary" value="Save Changes" name='confirm'>
-									</div>
-
-								</div>
-
-							</form> <!-- /form -->
+                            {% if error %}
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error.email }}
+                                </div>  
+                            {% endif %}
+                             
+                               
+                                {{  form(EditForm) }}
 
 						</div> <!-- /edit -->
                         {% endif %}
@@ -198,7 +132,7 @@
 
 			</div> <!-- /row -->
 
-			<div class="pre wow zoomIn" data-wow-delay="0.2s">
+			<div class="pre wow zoomIn mt-5" data-wow-delay="0.2s">
 				<span class="text-accent profile">My Collect</span>
 			</div>
 			

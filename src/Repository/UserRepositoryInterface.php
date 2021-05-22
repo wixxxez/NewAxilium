@@ -20,4 +20,11 @@ interface UserRepositoryInterface {
      * @return user
      */
     public function createNewUser(User $user):object;
+
+    /**
+     * @param User $user
+     * @return User
+     */
+    public function updateUser(User $user) : object;
+    public function setViews(User $user);
 }

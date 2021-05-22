@@ -72,7 +72,7 @@ class User implements UserInterface
         $this->name = $hobby;
         return $this;
     }
-    public function getPlainPassword():string {
+    public function getPlainPassword() {
         return $this->plainPassword;
     }
     public function setPlainPassword(string $plp) {
@@ -89,7 +89,7 @@ class User implements UserInterface
         return $this->views;
     }
     public function updateViews(){
-        $this->views++;
+         $this->views++;
     }
     public function getPhoto():string{
         return $this->profile_photo;

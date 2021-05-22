@@ -16,6 +16,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\Query\Lexer;
+use PhpParser\Node\Expr\Cast\Double;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -73,6 +75,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
         
     }
+    public function setViews(User $user){
+        $query = $this->em->createQuery(
+            "UPDATE App\Entity\User u SET u.views = :views WHERE u.id = :id"
+        )->setParameter('views',$user->getViews()+floatval(0.5))->setParameter('id',$user->getId());
+        $query->getResult();
+        return $user;
+    }
     public function createNewUser(User $user): object
     {
         $password = $this->psw -> encodePassword($user, $user->getPlainPassword());
@@ -81,6 +90,21 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->em->persist($user);
         $this->em->flush();
         
+        return $user;
+    }
+    /**
+     * @param User $user
+     * @return User
+     */
+    public function updateUser(User $user): object
+    {
+        if($user->getPlainPassword()){
+            $password = $this->psw->encodePassword($user,$user->getPlainPassword());
+            $user->setPassword($password);
+        }
+    
+        $this->em->persist($user);
+        $this->em->flush();
         return $user;
     }
     
