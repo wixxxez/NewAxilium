@@ -1,0 +1,244 @@
+{% extends "public/base.html.twig" %}
+{% block body %}
+    <!--VERIFACATION CONSTRUCTION ON PROFILE PAGE //TODO: Pass to user service later -->
+    {% if app.user %}
+        {% if user.name == app.user.name %}
+            {% set status = "true" %}
+        {% else %}
+            {% set status = 'false' %}
+        {% endif %}
+    {% else %}
+        {% set status = 'false' %}
+    {% endif %}
+    
+
+    <section class="profile">
+
+		<div class="container profile">
+
+			<div class="row m-y-2">
+                
+                    <div class="col-lg-4 pull-lg-8 text-xs-center">
+
+                        <img src="{{ asset(user.photo) }}" class="m-x-auto img-fluid img-circle wow slideInLeft" alt="avatar">
+                        <hr>
+                        <form action="" method='post' enctype="multipart/form-data">
+                         {% if status == "true" %}
+                            <label class="custom-file">
+                                <span class="custom-file-control">Choose file for new photo</span>
+                                <input type="file" id="file" class="custom-file-input" name="file" accept="image/*">
+                                    
+                            </label>
+                            <button type = 'submit' name='upload' class='fa fa-upload' style='background-color:#004bff;height:35px;width:35px;border-radius:50%;'> </button>  Upload
+                            
+                            </form>
+                        {% endif %} 
+                        <br/>
+                    </div> <!-- /photo -->
+              
+
+				<div class="col-lg-8 push-lg-4">
+
+					<ul class="nav nav-tabs">
+
+						<li class="nav-item">
+							<a href="" data-target="#profile" data-toggle="tab" class="nav-link active profile">Profile</a>
+						</li>
+
+                    {% if status == "true" %}
+						<li class="nav-item">
+							<a href="" data-target="#edit" data-toggle="tab" class="nav-link profile">Edit</a>
+						</li>
+                    {% endif %}
+					</ul> <!-- /tabs -->
+
+					<div class="tab-content p-b-3">
+
+						<div class="tab-pane active" id="profile">
+
+							<div class="row">
+
+								<div class="col-md-6">
+
+									<h4>About me</h4>
+									<hr>
+									<h6>{{ user.name }}</h6>
+						
+									<hr>
+									<h4>Hobbies</h4>
+									<hr>
+									<p> {{ user.hobby }}</p>
+									<hr>
+
+								</div>
+								
+								<div class="col-md-6">
+
+									<h4>Activity</h4>
+									<hr/>
+								    
+									<span class="tag tag-primary"><i class="fa fa-money"></i> Сумма пожертвований: 0 UAH</span><br/><br/>
+									<span class="tag tag-danger"><i class="fa fa-eye"></i> Просмотров: {{ user.views }} </span><br/><br/>
+									<span class="tag tag-danger"><i class="fa fa-briefcase"></i>Количество сборов: 0</span><br/><br/>
+								</div>
+
+								<div class="col-md-12">
+
+									<h4 class="m-t-2"><span class="fa fa-clock-o ion-clock pull-xs-right"></span>Recent Activity</h4>
+									<hr>
+									<table class="table table-hover table-striped">
+
+										<tbody>                                    
+                                            <tr>
+												<td>
+													<strong> {{ user.name }}</strong> donate <strong> 0 UAH</strong> into <strong> 
+                                                    Some Project <a href='#"'></a>
+                                                    </strong>
+												</td>
+											</tr>
+                                            <tr>
+												<td>
+													<strong>У этого пользователя нет пожертвований</strong>
+												</td>
+											</tr>
+                                         
+										</tbody>
+										
+									</table> <!-- /table -->
+									
+								</div>
+
+							</div> <!-- /row panel -->
+
+						</div> <!-- /active panel -->
+
+                        {% if status == "true" %}
+                            <div class="tab-pane" id="edit">
+
+							<h4 class="m-y-2">Edit Profile</h4>
+							<hr>
+							
+							<form role="form" action="" method="POST">
+
+								<div class="form-group row">
+
+									<label class="col-lg-3 col-form-label form-control-label">First name</label>
+
+									<div class="col-lg-9">
+										<input class="form-control" type="text" placeholder="Adam" name='fname'>
+									</div>
+
+								</div>
+
+								<div class="form-group row">
+
+									<label class="col-lg-3 col-form-label form-control-label">Last name</label>
+
+									<div class="col-lg-9">
+										<input class="form-control" type="text" placeholder="Marcus" name='lname'>
+									</div>
+
+								</div>
+
+								<div class="form-group row">
+
+									<label class="col-lg-3 col-form-label form-control-label">Email</label>
+
+									<div class="col-lg-9">
+										<input class="form-control" type="email" placeholder="email@gmail.com" name='email'>
+									</div>
+
+								</div>
+
+								<div class="form-group row">
+
+									<label class="col-lg-3 col-form-label form-control-label">Hobbies</label>
+
+									<div class="col-lg-9">
+										<input class="form-control" type="text" value="" name='hobby'>
+									</div>
+
+								</div>
+								<div class="form-group row">
+
+									<label class="col-lg-3 col-form-label form-control-label">Password</label>
+
+									<div class="col-lg-9">
+										<input class="form-control" type="password" value="" name='p1'>
+									</div>
+
+								</div>
+
+								<div class="form-group row">
+
+									<label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
+
+									<div class="col-lg-9">
+										<input class="form-control" type="password" value="" name='p2'>
+									</div>
+
+								</div>
+
+								<div class="form-group row">
+
+									<label class="col-lg-3 col-form-label form-control-label"></label>
+
+									<div class="col-lg-9">
+									
+										<input type="submit" class="btn btn-primary" value="Save Changes" name='confirm'>
+									</div>
+
+								</div>
+
+							</form> <!-- /form -->
+
+						</div> <!-- /edit -->
+                        {% endif %}
+						
+
+					</div> <!-- /content -->
+
+				</div> <!-- /info -->
+
+			</div> <!-- /row -->
+
+			<div class="pre wow zoomIn" data-wow-delay="0.2s">
+				<span class="text-accent profile">My Collect</span>
+			</div>
+			
+			<div class="row justify-content-sm-center">
+					
+				<article class="col-md-10 col-xl-8 wow fadeIn">
+					<a href='#'>
+					<div class="post-event-single section-md">
+
+						<div class="post-event-single-body text-md-left">
+							<img src="#" alt="Donater" style='height:100%; width:100%'>
+						</div>
+
+					</div>
+
+					<div class="group">
+						
+						Some full name
+
+					</div>
+                    </a>
+                        </article>
+
+			</div> <!-- /row -->
+			<div class="row justify-content-sm-center">
+				
+				<article class="col-md-10 col-xl-8 wow fadeIn">
+					<center>                    <font style='color:black; font-weight:bold;'>У этого пользователя нету сборов.</font>
+                    </center>
+				</article>
+
+			</div> <!-- /row -->
+
+
+
+		</div> <!-- /container -->
+
+	</section> <!-- /PROFILE -->
+{% endblock %}

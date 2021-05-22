@@ -55,6 +55,9 @@ class User implements UserInterface
     */
     private $name;
     public function getHobby() : string {
+        if($this->hobby == null ){
+            return "No information";
+        }
         return $this->hobby;
     }
     public function sethobby(string $hobby):self{
@@ -62,6 +65,7 @@ class User implements UserInterface
         return $this;
     }
     public function getName() : string {
+        
         return $this->name;
     }
     public function setName(string $hobby):self{

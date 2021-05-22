@@ -22,11 +22,11 @@ class PublicController extends AbstractController{
     protected $guard;
  
     protected $us;
-    protected $userRepositor;
-    public function __construct(UserRepository $u,UserRepositoryInterface $ui,AuthenticationUtils $ai, UserService $us,LoginAuthenticator $login, GuardAuthenticatorHandler $guard)
+    
+    public function __construct(UserRepositoryInterface $ui,AuthenticationUtils $ai, UserService $us,LoginAuthenticator $login, GuardAuthenticatorHandler $guard)
     {
         $this->userRepository=$ui;
-        $this->userRepositor = $u;
+        
         $this->ai=$ai;
         $this->us=$us;
       

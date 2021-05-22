@@ -7,16 +7,16 @@
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
-            <link rel='stylesheet' href="indreex.css">
-            <link rel='stylesheet' href="animate.css">
+            <link rel='stylesheet' href="{{ asset('indreex.css')}}">
+            <link rel='stylesheet' href=" {{ asset('animate.css') }} ">
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	        <link rel="stylesheet" href="indreex.css">
-            <link rel="stylesheet" href="form/index.css">
-            <link rel="stylesheet" href="css/index.css">
+	
+            <link rel="stylesheet" href="{{asset('form/index.css')}}">
+            <link rel="stylesheet" href="{{ asset('css/index.css')}}">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <link rel="icon" href="icons/logo1-восстановлено.png">
-            <link rel="stylesheet" href='frames/smoke-pure.css'>
-             <link rel="stylesheet" href="animate.css">
+            <link rel="icon" href="{{ asset('icons/logo1-восстановлено.png')}}">
+            <link rel="stylesheet" href='{{ asset('frames/smoke-pure.css')}}'>
+             <link rel="stylesheet" href="{{ asset('animate.css')}}">
         {% endblock %}
 
        <style>
@@ -51,7 +51,7 @@
 		<nav class="navbar navbar-expand-lg navbar-light" id="menu">
 			
 			<!-- LOGO -->
-			<a href="{{ path('home') }}" onclick="return up()" class="logo-header mostion"><img class="axilium-logo" src="icons/logo1-восстановлено.png" alt="logo" width="70" height="45"></a>
+			<a href="{{ path('home') }}" onclick="return up()" class="logo-header mostion"><img class="axilium-logo" src="{{ asset('icons/logo1-восстановлено.png')}}" alt="logo" width="70" height="45"></a>
 			
 			<!-- COLLAPSE BTN -->
 			<div class="navbar_container">
@@ -112,9 +112,7 @@
 					<i class="icon-plus"></i>
 					Collect on Axilium 
 				</button></a>
-				{% if Reload == true %}
-   					<script>window.parent.location.href = "{{ path('home') }}" </script>
-				{% endif %}
+				
 				{% block  forms %}
 				{% if app.user==null %}
 				<div id="id01" class="modal">
@@ -176,13 +174,13 @@
 				
 				<button class="btn btn-secondary dropdown-toggle avtorization" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<a class="menu-item menu-green user-name" href="#">
-						<img class="avatar" src="{{ app.user.photo }}">
+						<img class="avatar" src="{{ asset(app.user.photo) }}">
 						<span> {{ app.user.name }}</span>
 					</a>
 				</button>
 				
 				<div class="dropdown-menu avtorization" aria-labelledby="dropdownMenuButton" tabindex="-1">
-					<a class="item" href="{{ path('home') }}">
+					<a class="item" href="{{ path('profile',{'id': app.user.id}) }}">
 						<i class="icon-cogs"></i>
 						<span>My Profile</span>
 					</a>
@@ -213,11 +211,11 @@
 	        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-            <script src='frames/smoke-pure.js' ></script>
+            <script src='{{ asset('frames/smoke-pure.js') }}' ></script>
             <!-- ANIMATION -->
            
             <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
 
-            <script src="script.js"></script>	
+            <script src="{{ asset('script.js')}}"></script>	
     {% endblock %}
 </html>
