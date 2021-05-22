@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ImageFormType extends AbstractType
 {
@@ -17,11 +18,17 @@ class ImageFormType extends AbstractType
             ->add('profile_photo',FileType::class, array(
                 'label'=>'Choose your profile photo',
                 'required'=>true,
-                'mapped'=>false 
+                'mapped'=>false,
+                'constraints'=> new File([
+                    'mimeTypes'=>'image/*',
+                    'mimeTypesMessage'=>'Please input are photo'
+                ]),
+                'attr'=>[ 'class'=>"custom-file-input"]
             ))
             ->add('save',SubmitType::class,array(
-                'label'=>'Upload',
-                'attr'=> [ 'class'=>'btn btn-primary' ]
+                'label'=>' ',
+                
+                'attr'=> [ 'class'=>'fa fa-upload', 'style'=>'background-color:#004bff;height:35px;width:35px;border-radius:50%;' ]
             ))
         ;
     }
