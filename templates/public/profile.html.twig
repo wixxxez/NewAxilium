@@ -22,16 +22,12 @@
 
                         <img src="{{ asset(user.photo) }}" class="m-x-auto img-fluid img-circle wow slideInLeft" alt="avatar">
                         <hr>
-                        <form action="" method='post' enctype="multipart/form-data">
+                        
                          {% if status == "true" %}
-                            <label class="custom-file">
-                                <span class="custom-file-control">Choose file for new photo</span>
-                                <input type="file" id="file" class="custom-file-input" name="file" accept="image/*">
-                                    
-                            </label>
-                            <button type = 'submit' name='upload' class='fa fa-upload' style='background-color:#004bff;height:35px;width:35px;border-radius:50%;'> </button>  Upload
-                            
-                            </form>
+                            {% if ImageForm %}
+                                {{ form(ImageForm) }}
+                            {% endif %}
+                          
                         {% endif %} 
                         <br/>
                     </div> <!-- /photo -->
@@ -79,7 +75,7 @@
 								    
 									<span class="tag tag-primary"><i class="fa fa-money"></i> Сумма пожертвований: 0 UAH</span><br/><br/>
 									<span class="tag tag-danger"><i class="fa fa-eye"></i> Просмотров: {{ user.views }} </span><br/><br/>
-									<span class="tag tag-danger"><i class="fa fa-briefcase"></i>Количество сборов: 0</span><br/><br/>
+									<span class="tag tag-danger"><i class="fa fa-briefcase"></i> Количество сборов: 0</span><br/><br/>
 								</div>
 
 								<div class="col-md-12">

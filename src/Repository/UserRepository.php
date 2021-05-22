@@ -3,10 +3,13 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Service\ImageServiceInterface;
 use App\Service\UserService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\DomCrawler\Image;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -25,11 +28,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     private $em;
     private $psw;
     private $userServ;
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $em, UserPasswordEncoderInterface $psw,UserService $userServ)
+    private $img;
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $em,ImageServiceInterface $img, UserPasswordEncoderInterface $psw,UserService $userServ)
     {
         $this->em = $em;
         $this->psw=$psw;
         $this->userServ = $userServ;
+        $this->img = $img;
         parent::__construct($registry, User::class);
 
     }
@@ -54,6 +59,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function getAll():array {
 
         return parent::findAll();
+    }
+    public function updateImage(User $user,$file){
+        if($file){
+            $newFile = $this->img->uploadFile($file);
+            $oldPhoto = $user->getPhoto();
+            if($oldPhoto != 'icons/img/profile.png') {
+                $this->img->removeFile($oldPhoto);
+            }
+            $user->setPhoto($newFile);
+            $this->em->persist($user);
+            $this->em->flush();
+        }
+        
     }
     public function createNewUser(User $user): object
     {

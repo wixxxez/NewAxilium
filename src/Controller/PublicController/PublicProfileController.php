@@ -2,6 +2,7 @@
 
 namespace App\Controller\PublicController;
 
+use App\Form\ImageFormType;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +17,20 @@ class PublicProfileController extends PublicController {
      */
     public function index(int $id, Request $request ){
         $user = $this->userRepository->getOne($id);
+        $status = 'false';
+        $imgForm = null;
+        if($this->getUser()->getId() == $user->getId() ){
+            $status = "true";
+            $ImageForm = $this->createForm(ImageFormType::class,$user);
+            $ImageForm->handleRequest($request);
+            if($ImageForm->isSubmitted() && $ImageForm->isValid()){
+                $image = $ImageForm->get('profile_photo')->getData();
+                $this->userRepository->updateImage($user,$image);
+                return $this->redirectToRoute('profile', [ 'id'=> $user->getId() ]);
+            }
+            $imgForm =  $ImageForm->createView();
+            
+        }
         
             $form = parent::getRegForm($request);
             $data  = [
@@ -23,7 +38,8 @@ class PublicProfileController extends PublicController {
                 'last_username'=>'',
                 'error'=>'',
                 'user'=>$user,
-                'status'=>'true'
+                'status'=>$status,
+                'ImageForm' =>   $imgForm
                 
             ];
             if($form == null ){
