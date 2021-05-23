@@ -77,6 +77,12 @@ class Post
      */
     private $donate_info;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="publications")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $nickname;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -222,6 +228,18 @@ class Post
     public function setDonateInfo(?string $donate_info): self
     {
         $this->donate_info = $donate_info;
+
+        return $this;
+    }
+
+    public function getNickname(): ?User
+    {
+        return $this->nickname;
+    }
+
+    public function setNickname(?User $nickname): self
+    {
+        $this->nickname = $nickname;
 
         return $this;
     }

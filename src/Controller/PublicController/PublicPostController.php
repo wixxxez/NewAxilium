@@ -21,6 +21,7 @@ class PublicPostController extends PublicController  {
      */
     public function index(Request $request, int $id){
         $post = $this->PostRepostitory->getOne($id);
+        $userName = $post->getNickname()->getName();
        
             $form = parent::getRegForm($request);
             $data  = [
@@ -28,7 +29,8 @@ class PublicPostController extends PublicController  {
                 'last_username'=>'',
                 'error'=>'',
                 'post'=>$post,
-                'amount'=>$this->PostService->getAmount($post)
+                'amount'=>$this->PostService->getAmount($post),
+                'nickname'=>$userName
                
             ];
             if($form == null ){

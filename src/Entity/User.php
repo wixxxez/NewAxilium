@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -54,6 +56,16 @@ class User implements UserInterface
      * @ORM\Column(type="string",length=255)
     */
     private $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="nickname", orphanRemoval=true)
+     */
+    private $publications;
+
+    public function __construct()
+    {
+        $this->publications = new ArrayCollection();
+    }
     public function getHobby() : string {
         if($this->hobby == null ){
             return "No information";
@@ -179,5 +191,35 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Post[]
+     */
+    public function getPublications(): Collection
+    {
+        return $this->publications;
+    }
+
+    public function addPublication(Post $publication): self
+    {
+        if (!$this->publications->contains($publication)) {
+            $this->publications[] = $publication;
+            $publication->setNickname($this);
+        }
+
+        return $this;
+    }
+
+    public function removePublication(Post $publication): self
+    {
+        if ($this->publications->removeElement($publication)) {
+            // set the owning side to null (unless already changed)
+            if ($publication->getNickname() === $this) {
+                $publication->setNickname(null);
+            }
+        }
+
+        return $this;
     }
 }
