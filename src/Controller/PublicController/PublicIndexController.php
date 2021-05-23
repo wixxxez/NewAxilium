@@ -13,13 +13,15 @@ class PublicIndexController extends PublicController {
      * @Route("/",name="home")
      */
     public function index(Request $request, $Reload = null ){
+        $imPost = $this->PostRepository->getImmediantlyPost();
         try {
             $form = parent::getRegForm($request);
             $data  = [
                 'Regform' =>$form,
                 'last_username'=>'',
                 'error'=>'',
-                'Reload' => $Reload
+                'Reload' => $Reload,
+                'postIm'=>$imPost
             ];
             if($form == null ){
                 return $this->redirectToRoute('home');

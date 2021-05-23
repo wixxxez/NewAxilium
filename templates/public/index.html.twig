@@ -113,5 +113,76 @@
 		</div> <!-- /container -->
 
 	</section> <!-- /INFO_SECOND -->
+	{% if postIm %}
+	
+		
+	
+	<section id="recomended" class="section section-lg">
+		
+		<div class="pre wow zoomIn" data-wow-delay="0.2s">
+			<span class="text-accent">Рекомендовані збори</span>
+		</div>
+
+		<div class="slider">
+			
+			<div class="slider__wrapper">
+				
+				<div class="slider__items">
+				{% set i = 1 %}
+				{% for post in postIm %}
+					<div class="slider__item slider__item_{{ i }}" >
+					{% set i = i + 1 %}
+						
+						<span class="slider__item_inner">
+							
+							<span class="slider__item_img">
+								<img class="slider__item_photo wow rollIn" src="{{ asset(post.profileImage)}}" width="570" height="330" alt="Recomended Patient`s">
+							</span>
+							
+							<span class="slider__item_testimonial">
+								
+								<span class="slider__item_name wow slideInDown">{{ post.title }} </span>																
+								<span class="slider__item_post wow zoomInRight">
+									{{ post.Nickname.name }}
+								</span>
+								
+								<span class="slider__item_text wow zoomInRight">
+									{{ post.content[:255] }}...
+								</span>
+								
+								<span class="slider__item_action wow slideInUp">
+									<a href="patient.php?idkey=<?php echo $roe->id; ?>" class="btn btn-outline-secondary" style="color:white">Learn More</a>
+								</span>
+
+							</span>
+
+						</span> <!-- /slider__item_inner -->
+
+					</div> <!-- /slider__item slider__item_1 --> 
+					
+					{% endfor %}
+					
+					
+				</div> <!-- /slider__items -->
+				
+				<a class="slider__control slider__control_prev" href="#" role="button"></a>
+				<a class="slider__control slider__control_next" href="#" role="button"></a>
+
+			</div> <!-- /slider__wrapper -->
+
+		</div> <!-- /slider -->
+
+
+		
+			
+		
+
+	</section> <!-- /RECOMENDED -->
+	{% endif %}
+
+	 
+        
+		
+    
 
 {% endblock %}

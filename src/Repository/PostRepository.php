@@ -36,6 +36,13 @@ class PostRepository extends ServiceEntityRepository implements PostRepositoryIn
         return parent::find($id);
         
     }
+    /**
+     * @return array
+     */
+    public function getImmediantlyPost(): array
+    {
+        return parent::findBy(['immediantly'=>1],['id'=>'DESC'],3);
+    }
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */

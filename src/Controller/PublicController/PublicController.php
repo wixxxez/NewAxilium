@@ -3,6 +3,7 @@ namespace App\Controller\PublicController;
 
 use App\Entity\User;
 use App\Form\RegisterFormType;
+use App\Repository\PostRepositoryInterface;
 use App\Repository\UserRepository;
 use App\Repository\UserRepositoryInterface;
 use App\Security\LoginAuthenticator;
@@ -22,14 +23,15 @@ class PublicController extends AbstractController{
     protected $guard;
  
     protected $us;
+    protected $PostRepository;
     
-    public function __construct(UserRepository $ui,AuthenticationUtils $ai, UserService $us,LoginAuthenticator $login, GuardAuthenticatorHandler $guard)
+    public function __construct(PostRepositoryInterface $pri,UserRepository $ui,AuthenticationUtils $ai, UserService $us,LoginAuthenticator $login, GuardAuthenticatorHandler $guard)
     {
         $this->userRepository=$ui;
         
         $this->ai=$ai;
         $this->us=$us;
-      
+        $this->PostRepository = $pri;
         $this->log = $login ;
         $this->guard=$guard;
     }

@@ -30,6 +30,7 @@ function up() {
 	return false;
 };
 
+
 /*======================================================	Скролл до якорів    ==============================================*/
 // збираємо всі якорі; встановлюємо час анімації і кількість кадрів
 const anchors = [].slice.call(document.querySelectorAll('a[href*="#"]')),
@@ -43,7 +44,8 @@ anchors.forEach(function(item) {
     	e.preventDefault();
 
     	// для кожного якоря беремо відповідний йому елемент і визначаємо його координату Y
-    	let coordY = document.querySelector(item.getAttribute('href')).getBoundingClientRect().top + window.pageYOffset;
+    	let coordY = document.querySelector(item.getAttribute('href'))
+		console.log(coordY);
     																			// "window.pageYOffset" Поточна прокрутка зверху
     											// "getBoundingClientRect" повертає розмір елемента і його позицію щодо viewport
     	// запускаємо інтервал
@@ -74,17 +76,17 @@ let modal = document.getElementById('id01');
 window.onclick = function(event) {
 	if (event.target == modal) { // ссилка на об'єкт
 		modal.style.display = "none";
-}
+	}
 };
 
 document.getElementById('sign').onclick = function() {
-	document.getElementById('sign').classList.add('active');
-	document.getElementById('sign_in').classList.remove('active');
+  	document.getElementById('sign').classList.add('active');
+  	document.getElementById('sign_in').classList.remove('active');
 };
 
 document.getElementById('sign_in').onclick = function() {
-	document.getElementById('sign').classList.remove('active');
-	document.getElementById('sign_in').classList.add('active');
+  	document.getElementById('sign').classList.remove('active');
+  	document.getElementById('sign_in').classList.add('active');
 };
 
 /*=======================================================	Ефект Друкарської Машинки  =======================================*/
@@ -126,7 +128,7 @@ var slideShow = (function () {
               	directionAutoplay: 'next', // напрямок зміни слайдів
               	delayAutoplay: 5000, // інтервал між автоматичною зміною слайдів
              	isPauseOnHover: true // чи встановлювати паузу при піднесенні курсору до слайдеру
-             };
+            };
 
             // настройка конфігурації слайдера в залежності від отриманих ключів
             for (var key in config) {
@@ -294,7 +296,7 @@ var slideShow = (function () {
           				_startAutoplay();
           			}
           		}, false);
-
+          	
           		if (_config.isPauseOnHover && _config.isAutoplay) {
           			_slider.addEventListener('mouseenter', function () {
           				_stopAutoplay();
@@ -331,9 +333,9 @@ var slideShow = (function () {
             		_config.isAutoplay = true;
             		_startAutoplay();
             	}
-            }
-        }
-    }());
+        	}
+    	}
+}());
 
 slideShow('.slider', {
 	isAutoplay: true

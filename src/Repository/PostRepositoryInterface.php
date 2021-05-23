@@ -1,6 +1,8 @@
 <?php
 namespace App\Repository;
 
+use App\Entity\Post;
+
 interface PostRepositoryInterface {
     /**
      * @return Post[]
@@ -13,5 +15,9 @@ interface PostRepositoryInterface {
      */
     public function getOne(int $id):object;
 
+    /**
+     * @return array
+     */
+    public function getImmediantlyPost():array;
     
 }

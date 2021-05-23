@@ -17,16 +17,7 @@ class Post
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $full_name;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $user_id;
-
+    
     /**
      * @ORM\Column(type="text")
      */
@@ -40,12 +31,12 @@ class Post
     /**
      * @ORM\Column(type="integer")
      */
-    private $immediantly;
+    private $immediantly=0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $views;
+    private $views=0;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -88,30 +79,8 @@ class Post
         return $this->id;
     }
 
-    public function getFullName(): ?string
-    {
-        return $this->full_name;
-    }
-
-    public function setFullName(string $full_name): self
-    {
-        $this->full_name = $full_name;
-
-        return $this;
-    }
-
-    public function getUserId(): ?int
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(int $user_id): self
-    {
-        $this->user_id = $user_id;
-
-        return $this;
-    }
-
+   
+   
     public function getContent(): ?string
     {
         return $this->Content;
