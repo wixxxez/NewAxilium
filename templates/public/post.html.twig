@@ -1,1 +1,337 @@
 {% extends "public/base.html.twig" %}
+{% block body %}
+<section class="probootstrap-section">
+		
+		<div class="container patient">
+			
+			<div class="tablet-stackable" id="column-container">
+				
+				<div class="ten wide column" id="left-column">
+					
+					
+					<div class="box with-padding with-margin" id="cause-content">
+						{% if post.immediantly == 1 %}
+                            <div class="ribbon label red">
+                                <span>Recommended</span>
+                            </div>
+                        {% endif %}
+						<div class="main-photo">
+							<img alt="Franio Marcinkowski " src="{{ asset(post.profileImage) }}">
+						</div>
+
+						<div class="bordered-box with-padding gray-corner" id="cause-info">
+							
+							<div class="goal">
+								<h5 class="label">Goal collection</h5>
+								<p class="value">{{ post.title }}</p>
+							</div>
+
+							<div class="two columns stackable" id="icoMoon">
+								
+								<div class="column">
+									<i class="icon-user"></i>
+									<p>{{ post.fullName }}</p>
+								</div>
+								
+								<div class="column">
+									<i class="icon-location"></i>
+									<p>{{ post.adress }}</p>
+								</div>
+				
+							</div> <!-- /columns -->
+					        {{ post.content }}
+
+						</div> <!-- /cause-info -->
+
+					</div> <!-- /cause-content -->
+
+				</div> <!-- /left-column -->
+				<div class="six wide column" id="right-column">
+					
+					<div class="sticky">
+						
+						<div class="box with-padding human-cause">
+							
+							<div class="cause-top">	
+								<h6>Axilium</h6>
+							</div>
+
+							<div class="cause-progressbar">
+								
+								<div class="supported">									
+									<span>Views</span>
+									<span class="payments-count" data-value="60638">{{ post.views }} </span>
+									<span>people</span>
+								</div>
+                              
+								<div class="progress" style="height: 30px;">
+
+									<div class="progress-bar" role="progressbar" style="width:{{ amount.procent }}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+
+									<div class="text">
+										<span class="amount" data-value="55 000">{{ post.progress }} USD </span>
+
+										<small>
+											(<span class="percentage" data-value="22">{{ amount.subProcent }} %</span>)
+										</small>										
+									</div>
+
+								</div>
+
+								<div class="still-needed">									
+									<span>To reach our goal:</span>
+									<span class="amount-left" data-value="100000">{{ post.goalSumm }}</span>
+								</div>
+
+							</div> <!-- /progressbar -->
+                                
+                            <center>
+                        
+                                 
+                            {% if app.user %}
+                                <button class="sp-button big red with-icon full-width" type="button" data-toggle="modal" data-target="#myModal">								
+								<span class="icon">
+									<i class="icon-heart"></i>
+								</span>
+								<span>Donate</span>
+							</button>
+                            <!-- MODAL DONAT-->
+
+							<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document" style="margin-top: 56.5px;">
+									<div class="modal-content">
+										
+										<div class="modal-header bg-primary">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+											<h4 class="modal-title" id="myModalLabel">Donation</h4>
+										</div>
+										
+										<div class="modal-body">
+											
+											
+											<form action="" method='post'>
+												<div class="row">
+												<p class="m-b10" style='padding:0px 0px 0px 16px'>How much do you want to donate?</p>
+												<div class="col-md-6 col-xs-12 col-sm-6 m-b15">
+														<input type="text" class="form-controls" placeholder="Amount" name='amount'>
+													</div>
+													<br/> 
+													<p class="m-b10 m-t15" style='padding:0px 138px 0px 16px'>Personal Info</p>
+													<div class="col-md-6 col-xs-12 col-sm-6 m-b15">
+														<input type="text" class="form-controls" placeholder="First Name" name='firstname'>
+													</div>
+													<div class="col-md-6 col-xs-12 col-sm-6 m-b15">
+														<input type="text" class="form-controls" placeholder="Last Name" name='lastname'>
+													</div>
+													<div class="col-md-6 col-xs-12 col-sm-6 m-b15">
+														<input type="text" class="form-controls" placeholder="Phone Number" name='phonenumber'>
+													</div>
+													<div class="col-md-6 col-xs-12 col-xs-12 col-sm-6 m-b15">
+														<input type="text" class="form-controls" placeholder="Email" name='emailtrans'>
+													</div>
+													
+												</div>
+								    <button  type='submit' name='go_tranc' class="btn btn-primary btn-lg">Donate Now</button>
+											</form> <!-- /form -->
+											
+											
+										</div> <!-- /modal-body -->
+									
+									</div> <!-- /modal-content -->
+								</div> <!-- /modal-dialog -->
+							</div> <!-- /modal -->
+
+							<!-- /MODAL DONAT-->
+
+                            
+                            {% else %}
+                                
+                                <button type="button" onclick='smoke.alert ("<h1>Axilium</h1><br/>Ooops.. You need to login first.");'  style="display:inline-block!important;background:#0488cd;background-size:cover;width: 256px!important;height:54px!important;border:none!important;border-radius:14px!important;padding:18px!important;box-shadow:3px 2px 8px rgba(71,66,66,0.22)!important;text-align:center!important;outline:none!important;" onmouseover="this.style.opacity='0.8';" onmouseout="this.style.opacity='1';"><span style="font-family:Verdana,Arial,sans-serif!important;font-weight:bold!important;font-size:14px!important;color:#ffffff!important;line-height:18px!important;vertical-align:middle!important;" >Donate</span></button>
+                         
+                                
+                            {% endif %}
+						
+							
+                 
+
+                            </center>
+						
+
+							<div class="share" id="share">
+								
+								<div class="share-title">									
+									<span>Help spread the word!</span>
+								</div>
+
+								<div class="equal width">
+									
+									<div class="column">
+										
+										<a data-fb-share="#" href="#">
+											
+											<div class="logo">
+												<i class="icon-facebook2"></i>
+											</div>
+											
+											<div class="label">
+												<span>Share</span>
+											</div>
+
+										</a>
+
+									</div>
+
+									<div class="column">
+										
+										<a data-twitter-tweet="#" href="#">
+											
+											<div class="logo">
+												<i class="icon-twitter"></i>
+											</div>
+											
+											<div class="label">
+												<span>Tweet</span>
+											</div>
+
+										</a>
+
+									</div>
+
+								</div> <!-- /columns -->
+
+								<div class="share-amount">
+									
+								</div>
+
+							</div> <!-- /share -->
+
+						</div>
+
+					</div> <!-- /sticky -->
+
+				</div> <!-- /right-column -->
+
+			</div> <!-- /column-container -->			
+
+			<div class="col-md-12" >
+
+				<div class="dez-tabs product-description bg-tabs">
+
+					<ul class="nav nav-tabs">
+
+					
+					
+						<li class="active" id="tab_1">
+							<a data-toggle="tab"  aria-expanded="false" id ='comm' >
+								<span class="text-primary">22</span>Comment
+							</a>
+						</li>
+
+					</ul>
+
+					<div class="tab-content">
+
+						
+
+						<div id="developement-1" class="tab-pane active">		
+						
+							<div id="comments">								
+								<ol class="commentlist" >									
+
+									
+                            
+                                <li class="comment">
+										<div class="comment_container clearfix"> 
+
+											<img class="avatar avatar-60 photo" src="#" alt="" >
+											
+											<div class="comment-text">
+
+
+												<p class="meta"> 
+													<strong class="author"> <a href="#">NickName</a></strong> 
+													<span>
+														<i class="fa fa-clock-o"></i> 
+													</span> 
+												</p>
+
+												<div class="description">
+													<p>Something in the way</p>
+												</div>
+
+											</div>
+
+										</div>
+                                        </li>
+                               
+
+                               <li class="comment">
+										
+											<div class="comment-text">
+												<div class="description">
+													<p>Нет комментариев </p>
+												</div>
+											</div>
+
+										
+									</li>
+								
+
+								</ol> <!-- /commentlist -->							
+							</div> <!-- /#comments -->	
+                           
+    
+    <font style='color:red'></font>
+
+							<div class="row">
+
+								<div class="col-md-7">
+									<div class="widget-area no-padding blank">
+                                    <div class="status-upload">
+									
+                                    {% if app.user %}
+                                        <form action="" method='post'>
+												
+												<textarea placeholder="Напишите свой комментарий."  name="text"></textarea>
+												
+												
+												
+												<button type="submit" class="btn btn-success comment" name="sellc">
+													<i class="fa fa-share"></i> Share
+												</button>
+
+											</form>
+                                    {% else %}
+                                        
+                                        <center>
+												    <style>
+                                                        .status-upload {
+                                                            background-color: white;
+                                                        }
+                                                    </style>
+                                        <p style='background-color:white;'>Войдите, чтобы оставить коментарий.</p></center>
+                                    {% endif %}
+										
+											
+                                            
+											
+											
+								
+										</div><!-- Status Upload  -->
+									</div><!-- Widget Area -->
+								</div>
+
+							</div> <!-- /row -->											
+
+						</div> <!-- /developement-1 -->
+
+					</div> <!-- /tab-content -->
+
+				</div> <!-- /bg-tabs -->
+
+			</div> <!-- /col-md-12 -->
+
+		</div> <!-- /container -->
+
+	</section> <!-- /PATIENT -->
+{% endblock %}
