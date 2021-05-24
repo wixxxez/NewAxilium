@@ -14,6 +14,7 @@ class PublicIndexController extends PublicController {
      */
     public function index(Request $request, $Reload = null ){
         $imPost = $this->PostRepository->getImmediantlyPost();
+        $posts = $this->PostRepository->getAll();
         try {
             $form = parent::getRegForm($request);
             $data  = [
@@ -21,7 +22,8 @@ class PublicIndexController extends PublicController {
                 'last_username'=>'',
                 'error'=>'',
                 'Reload' => $Reload,
-                'postIm'=>$imPost
+                'postIm'=>$imPost,
+                'posts'=>$posts
             ];
             if($form == null ){
                 return $this->redirectToRoute('home');

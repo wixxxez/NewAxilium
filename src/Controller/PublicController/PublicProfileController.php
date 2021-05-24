@@ -24,6 +24,7 @@ class PublicProfileController extends PublicController {
         $imgForm = null;
         $EditForm = null;
         $error = null;
+        $userPosts = $this->PostRepository->getAllUserPosts($id);
         if($this->getUser()->getId() == $user->getId() ){
             $status = "true";
 
@@ -66,6 +67,7 @@ class PublicProfileController extends PublicController {
                 'status'=>$status,
                 'ImageForm' =>   $imgForm,
                 'EditForm' => $EditForm,
+                'posts'=>$userPosts
                 
                 
             ];

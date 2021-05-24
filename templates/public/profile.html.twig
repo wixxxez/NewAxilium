@@ -73,9 +73,9 @@
 									<h4>Activity</h4>
 									<hr/>
 								    
-									<span class="tag tag-primary"><i class="fa fa-money"></i> Сумма пожертвований: 0 UAH</span><br/><br/>
-									<span class="tag tag-danger"><i class="fa fa-eye"></i> Просмотров: {{ user.views / 2 |number_format(1) }} </span><br/><br/>
-									<span class="tag tag-danger"><i class="fa fa-briefcase"></i> Количество сборов: 0</span><br/><br/>
+									<span class="tag tag-primary"><i class="fa fa-money"></i> Donated: 0 USD</span><br/><br/>
+									<span class="tag tag-danger"><i class="fa fa-eye"></i> Views: {{ user.views  }} </span><br/><br/>
+									<span class="tag tag-danger"><i class="fa fa-briefcase"></i> Active Collects: 0</span><br/><br/>
 								</div>
 
 								<div class="col-md-12">
@@ -94,7 +94,7 @@
 											</tr>
                                             <tr>
 												<td>
-													<strong>У этого пользователя нет пожертвований</strong>
+													<strong>This user dont have donation</strong>
 												</td>
 											</tr>
                                          
@@ -135,39 +135,45 @@
 			<div class="pre wow zoomIn mt-5" data-wow-delay="0.2s">
 				<span class="text-accent profile">My Collect</span>
 			</div>
+			{% if posts %}
+			{% for post in posts|slice(0,10) %}
+				
 			
 			<div class="row justify-content-sm-center">
 					
 				<article class="col-md-10 col-xl-8 wow fadeIn">
-					<a href='#'>
+					<a href='{{ path('post',{'id': post.id }) }}'>
 					<div class="post-event-single section-md">
 
 						<div class="post-event-single-body text-md-left">
-							<img src="#" alt="Donater" style='height:100%; width:100%'>
+							<img src="{{ asset(post.profileImage) }}" alt="Donater" style='height:100%; width:100%'>
 						</div>
 
 					</div>
 
 					<div class="group">
 						
-						Some full name
+						{{ post.title }}
 
 					</div>
                     </a>
                         </article>
 
 			</div> <!-- /row -->
+			{% endfor %}
+		{% else %}
+			
 			<div class="row justify-content-sm-center">
 				
 				<article class="col-md-10 col-xl-8 wow fadeIn">
-					<center>                    <font style='color:black; font-weight:bold;'>У этого пользователя нету сборов.</font>
+					<center>                    <font style='color:black; font-weight:bold;'>This user dont have any collect.</font>
                     </center>
 				</article>
 
 			</div> <!-- /row -->
 
 
-
+		{% endif %}
 		</div> <!-- /container -->
 
 	</section> <!-- /PROFILE -->

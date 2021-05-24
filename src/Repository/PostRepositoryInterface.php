@@ -20,4 +20,9 @@ interface PostRepositoryInterface {
      */
     public function getImmediantlyPost():array;
     
+    /**
+     * @param int $id
+     * @return Post[]
+     */
+    public function getAllUserPosts(int $id):array;
 }

@@ -131,7 +131,7 @@
 	<section id="recomended" class="section section-lg">
 		
 		<div class="pre wow zoomIn" data-wow-delay="0.2s">
-			<span class="text-accent">Рекомендовані збори</span>
+			<span class="text-accent">Recommended</span>
 		</div>
 
 		<div class="slider">
@@ -189,6 +189,69 @@
 		
 
 	</section> <!-- /RECOMENDED -->
+	<!-- POPULAR -->
+	<section id="popular" class="section section-lg popular">
+		
+		<div class="pre wow zoomIn" data-wow-delay="0.2s">
+			<span class="text-accent">Popular</span>
+		</div>
+
+		<div class="container popular">
+			{% set rows = 0  %}
+			{% for post in posts|slice(0,6) %}
+				
+
+			
+                
+                {% if rows % 3  == 0 %}
+                   <div class="row">
+
+                {% endif %}
+				{% set rows = rows + 1 %}
+				<div class="col-sm">
+					
+					<div class="card wow fadeInDown">
+
+						<img class="card-img-top" src="{{ asset(post.profileImage) }}" alt="Immediately Patient`s" style= " max-height:300px;">
+
+						<div class="card-body">
+							
+							<div class="card-title">
+
+								<h5>{{ post.title }}</h5>
+
+							</div>
+							
+							<p class="card-text">{{
+								post.content[:255]
+							}}...</p>
+
+							<a href="{{ path('post',{'id': post.id }) }}" class="btn btn-outline-secondary">Donate Now</a>
+
+						</div>
+
+					</div>
+
+                </div>
+				{% if rows % 3 == 0 %}
+                   </div>
+                {% endif %}
+        
+       	{% endfor %}
+
+			
+			
+			<div class="container_divider wow zoomIn" data-wow-delay="0.2s">
+				
+				<div class="divider"></div>
+
+			</div> <!-- /container_divider -->
+
+           
+
+		</div> <!-- /container -->
+
+	</section> <!-- /POPULAR -->
 	{% endif %}
 
 	 
