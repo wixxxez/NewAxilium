@@ -115,6 +115,17 @@
 	</section> <!-- /INFO_SECOND -->
 	{% if postIm %}
 	
+			
+						<!--Without that slider dont work -->
+						<div style="display:none;">
+							<li role="presentation" id="sign_in" class="active">
+								<a href="#Section1" aria-controls="home" role="tab" data-toggle="tab"></a>
+							</li>
+							<li role="presentation" id="sign">
+								<a href="#Section2" aria-controls="profile" role="tab" data-toggle="tab"></a>
+							</li>
+						</div>		
+				
 		
 	
 	<section id="recomended" class="section section-lg">
@@ -151,7 +162,7 @@
 								</span>
 								
 								<span class="slider__item_action wow slideInUp">
-									<a href="patient.php?idkey=<?php echo $roe->id; ?>" class="btn btn-outline-secondary" style="color:white">Learn More</a>
+									<a href="{{ path('post',{'id': post.id }) }}" class="btn btn-outline-secondary" style="color:white">Learn More</a>
 								</span>
 
 							</span>
