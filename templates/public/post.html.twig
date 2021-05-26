@@ -223,7 +223,8 @@
 					
 						<li class="active" id="tab_1">
 							<a data-toggle="tab"  aria-expanded="false" id ='comm' >
-								<span class="text-primary">22</span>Comment
+								<span class="text-primary">{% if comments %}{{ comments|length }}{% else %}0
+									{% endif %}</span>Comment
 							</a>
 						</li>
 
@@ -239,43 +240,52 @@
 								<ol class="commentlist" >									
 
 									
-                            
-                                <li class="comment">
+                            {% if comments %}
+								{% for com in comments|reverse %}
+									
+								
+								<li class="comment">
 										<div class="comment_container clearfix"> 
 
-											<img class="avatar avatar-60 photo" src="#" alt="" >
+											<img class="avatar avatar-60 photo" src="{{asset(com.userImage)}}" alt="" >
 											
 											<div class="comment-text">
 
 
 												<p class="meta"> 
-													<strong class="author"> <a href="#">NickName</a></strong> 
+													<strong class="author"> <a href="#">{{ com.nickname }}</a></strong> 
 													<span>
-														<i class="fa fa-clock-o"></i> 
+														<i class="fa fa-clock-o"> {{ com.time }}</i> 
 													</span> 
 												</p>
 
 												<div class="description">
-													<p>Something in the way</p>
+													<p>{{ com.text }}</p>
 												</div>
 
 											</div>
 
 										</div>
                                         </li>
-                               
-
-                               <li class="comment">
+									{% endfor %}
+							{% else %}
+								 <li class="comment">
 										
 											<div class="comment-text">
 												<div class="description">
-													<p>Нет комментариев </p>
+													<p>No comments</p>
 												</div>
 											</div>
 
 										
 									</li>
 								
+
+							{% endif %}
+                                
+                               
+
+                              
 
 								</ol> <!-- /commentlist -->							
 							</div> <!-- /#comments -->	
@@ -290,17 +300,7 @@
                                     <div class="status-upload">
 									
                                     {% if app.user %}
-                                        <form action="" method='post'>
-												
-												<textarea placeholder="Напишите свой комментарий."  name="text"></textarea>
-												
-												
-												
-												<button type="submit" class="btn btn-success comment" name="sellc">
-													<i class="fa fa-share"></i> Share
-												</button>
-
-											</form>
+                                       {{ form(comForm) }}
                                     {% else %}
                                         
                                         <center>
@@ -309,7 +309,7 @@
                                                             background-color: white;
                                                         }
                                                     </style>
-                                        <p style='background-color:white;'>Войдите, чтобы оставить коментарий.</p></center>
+                                        <p style='background-color:white;'>Login for create your comment </p></center>
                                     {% endif %}
 										
 											
