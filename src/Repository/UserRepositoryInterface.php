@@ -27,4 +27,5 @@ interface UserRepositoryInterface {
      */
     public function updateUser(User $user) : object;
     public function setViews(User $user);
+    public function updatePassword(User $user);
 }

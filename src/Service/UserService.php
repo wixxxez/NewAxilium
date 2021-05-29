@@ -33,6 +33,9 @@ class UserService {
         $guard->authenticateUserAndHandleSuccess($user,$request,$log,'main');
         
     }
+    public function setToken($email,$token){
+        
+    }
     public function setUser(User $user) {
 
         //return $this->guard->authenticateUserAndHandleSuccess($user,$this->request,$this->login,'main');

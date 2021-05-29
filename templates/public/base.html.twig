@@ -145,7 +145,7 @@
 								
 							</form> <!-- /form -->
 							      <div class="form-group forgot-pass">
-                                      <button onclick="smoke.prompt('Введите свой email. Вы получите письмо с подтверждением на свою почту', function(result){window.location.href = 'reset.php?token='+result;})" class="btn btn-default" style='color:grey'>Forgot password ?</button>
+                                      <button onclick="smoke.prompt('Введите свой email. Вы получите письмо с подтверждением на свою почту', function(result){window.location.href = '{{ path('reset_usr',{'email':"EMAIL"})}}'.replace('EMAIL',result) })" class="btn btn-default" style='color:grey'>Forgot password ?</button>
 									</div>  
 						</div>
 							
@@ -209,9 +209,31 @@
 		</nav>
 		
 	</header> <!-- /HEADER -->
+	 {% for messege in app.flashes('success') %}
+                        <div class="container">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>{{ messege }}</strong> 
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+                                        
+                        </div>{% endfor %}
+		{% for messege in app.flashes('danger') %}
+                        <div class="container">
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>{{ messege }}</strong> 
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+                                        
+                        </div>{% endfor %}
        {% block body %}{% endblock %}
 	   
-	   
+	  
+
+
 	   <!-- FOOTER -->
 	<footer class="page-footer font-small stylish-color-dark pt-4">
 

@@ -25,6 +25,7 @@ class PublicIndexController extends PublicController {
                 'postIm'=>$imPost,
                 'posts'=>$posts
             ];
+            
             if($form == null ){
                 return $this->redirectToRoute('home');
             }

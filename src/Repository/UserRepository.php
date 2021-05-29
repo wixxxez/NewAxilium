@@ -107,6 +107,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->em->flush();
         return $user;
     }
+    public function updatePassword(User $user)
+    {
+        $password = $this->psw->encodePassword($user,$user->getPlainPassword());
+        $user->setPassword($password);
+        $this->em->persist($user);
+        $this->em->flush();
+        return $user;
+    }
     
     // /**
     //  * @return User[] Returns an array of User objects

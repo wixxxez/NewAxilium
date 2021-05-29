@@ -1,0 +1,17 @@
+{% extends "public/base.html.twig" %}
+{% block body %}
+<body>
+<style>
+    #reset{
+        display:none;
+    }
+</style>
+  <section class="container bg-dark">
+    <div class="login bg-dark">
+      <h1>Input your new password</h1>
+     
+      {{ form(ConfirmForm)}}
+    </div>
+    </section>
+</body>
+{% endblock %}
